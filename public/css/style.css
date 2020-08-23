@@ -1,0 +1,104 @@
+body{
+background-color: rgba(233, 232, 232, 0.808) ;
+
+}
+.body-b{
+
+    background-color: rgba(233, 232, 232, 0.808) ;
+
+}
+.body-z{
+    
+    background-color: rgba(233, 232, 232, 0.808) ;
+
+}
+.navbar{
+   background-color: crimson;
+    margin-bottom: 20px;
+font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 18px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.dropless{
+        background-color:wheat;
+}
+.img{
+    height: 400px;
+    width: 100%;
+}
+.img-sm{
+    width: 100%;
+    height: 200px;
+}
+.img-fs{
+    width: 100%;
+height: 300px;
+}
+.info-right{
+    padding-top: 40px;
+}
+.h11{
+    margin-bottom: 30px;
+}
+.section2{
+    background-color: darkgray;
+    padding: 30px 0 30px 0px;
+    margin-top: 30px;
+}
+.dropy{
+    border: black solid 0px;
+    border-radius: 30px;
+   color: white;
+    background-color: rgb(212, 59, 59);
+    
+}
+.ly{
+    padding-left: 10px;
+}
+.cont1{
+    margin-top: 50px;
+    margin-left: 250px;
+    border: aliceblue 1px;
+    border-radius: 10px;
+    background-color: rgb(117, 114, 114);
+    color: rgb(19, 16, 16);
+}
+.re-bod{
+    background-color: rgb(236, 228, 228);
+}
+.cont2{
+    margin-left: 280px;
+    margin-top: 40px;
+    border: aliceblue 1px;
+    border-radius: 10px;
+    background-color: rgb(141, 118, 123);
+    color: rgb(19, 16, 16);
+}
+.smP{
+    margin-top: 100px;
+}
+.card1{
+    padding-left: 5px;
+}
+.products{
+    text-decoration: none;
+    padding-top: 9px;
+    padding-left: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: rgb(7, 0, 0);
+}
+.jumbo{
+    margin-top: 0px;
+     background-color: rgb(24, 42, 53);
+      padding-bottom: 30px;
+      padding-top: 10px;
+      border-radius: 2px;
+      margin-bottom: 50px;
+      font-weight: bold;
+}
+a:hover{
+    text-decoration: none;
+    color: cadetblue;
+}

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animation scroll</title>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="#">AbaDrgam</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse"  id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active ly">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+           
+            
+               <% if(user) { %> 
+                <li class="nav-item active dropdown ly">
+                <a class="nav-link dropdown-toggle dropy" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  add Products
+                </a>
+                <div class="dropdown-menu dropless" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item "  type="button" data-toggle="modal" data-target="#smart">Smart collections </a>
+                  <a class="dropdown-item "  type="button" data-toggle="modal" data-target="#brand">Brand collections</a>
+                  <a class="dropdown-item "  type="button" data-toggle="modal" data-target="#zoufon">Zoufon collections</a>
+
+                </div>
+              </li> 
+              <% } %>
+          </li>
+              </ul>
+              <ul class="navbar-nav navbar-right">
+                <li class="nav-item active">
+                <a class="nav-link" href="">Contact Us</a>
+            </li>
+            <% if(user) { %>
+              <li class="nav-item active">
+                <a class="nav-link" href="/login/loggout-user">log out</a></li> 
+            <% } %>
+               
+            <% if(!user) { %>   
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle dropy px-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Login Now
+                </a>
+                <div class="dropdown-menu dropless" aria-labelledby="navbarDropdown">
+                   <a class="dropdown-item " href="/login/login-user">login for admins</a>
+                  <!-- <a class="dropdown-item " href="/login/login-admin">login as Adminstrater</a> -->
+                </div>
+              </li>
+            <% } %>
+          </li>
+            </ul>
+
+        </div>
+</nav>
+<div class="jumbo " >
+<div class="products">
+  <span><a href="/comp/smart" class="products"> smart perfumes</a></span>
+  <span><a href="/comp/brand" class="products"> brand perfumes</a></span>
+  <span><a href="/comp/zoufon" class="products"> zoufon perfumes</a></span>
+  <span><a href="/comp/special-offer" class="products"> special offers</a></span>
+</div>
+<br> <br>
+  <h2 class="display-4 text-center" style="color: yellow;"> اباالضرغام اونلاين  </h2> <br>
+   <h4 class="display-4 text-center"style="color: white ;">  نمبر ون ولا نزال في القمة </h3>
+     
+  </div>
+  
+
+  
+<%- messages('messages', locals) %>
+
+<!-- <section class="section1">
+ <div class="container-fluid">
+     <div class="row">
+         <div class="col-md-6 col-sm-6 scroll">
+<img class="img" src="./img/folder.jpg" >
+         </div>
+         <div class="col-md-6 col-sm-6 info-right">
+             <h1 class="display-5 h11"> Aba dirgam is a leading company since 2009</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae neque nisi repellat dolor ex, minus excepturi vero placeat eveniet, iure accusantium? Dolore blanditiis omnis culpa hic dolorem ut dolor asperiores?</p>
+             <a class="btn btn-danger btn-lg">discover more</a>
+        </div>
+     </div>
+ </div>
+
+</section> -->
+
+<br> 
+
+<div class="modal fade" id="smart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form method="POST" action="/comp/smart" enctype="multipart/form-data" id="sm-form">
+          <%= typeof msg != 'undefined' ? msg : '' %>
+      <div class="modal-header">
+        <h3 class="modal-title text-danger text-center" id="exampleModalLabel">smrat product</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label >upload photo</label><br>
+         <input class="form-control" name="link" type="file" id="photo" >
+        </div>
+        <div class="fprm-control">
+          <label>Perfume name</label>
+          <input class="form-control" name="perfume" placeholder="add name" type="text" id="perfume">
+        </div>
+        <div class="fprm-control">
+          <label>Perfume price</label>
+          <input class="form-control" name="price" placeholder="add name" type="number" id="price">
+        </div>
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- brand model -->
+<div class="modal fade" id="brand" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form method="POST" action="/comp/brand" enctype="multipart/form-data">
+          <%= typeof msg != 'undefined' ? msg : '' %>
+      <div class="modal-header">
+        <h3 class="modal-title text-danger text-center" id="exampleModalLabel">Brand product</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label >upload photo</label><br>
+         <input class="form-control" name="link" type="file" >
+        </div>
+        <div class="fprm-control">
+          <label>Perfume name</label>
+          <input class="form-control" name="perfume" placeholder="add name" type="text">
+        </div>
+        <div class="fprm-control">
+          <label>Perfume price</label>
+          <input class="form-control" name="price" placeholder="add name" type="number">
+        </div>
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- zoufon model-->
+
+<div class="modal fade" id="zoufon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form method="POST" action="/comp/zoufon" enctype="multipart/form-data">
+          <%= typeof msg != 'undefined' ? msg : '' %>
+      <div class="modal-header">
+        <h3 class="modal-title text-danger text-center" id="exampleModalLabel">Zoufon product</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label >upload photo</label><br>
+         <input class="form-control" name="link" type="file" >
+        </div>
+        <div class="fprm-control">
+          <label>Perfume name</label>
+          <input class="form-control" name="perfume" placeholder="add name" type="text">
+        </div>
+        <div class="fprm-control">
+          <label>Perfume price</label>
+          <input class="form-control" name="price" placeholder="add name" type="number">
+        </div>
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--script forms-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<!-- <script>
+  const smForm = document.getElementById('sm-form');
+
+
+  smForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+  const photo = document.getElementById('photo').value;
+  const perfume = document.getElementById('perfume').value;
+  const price = document.getElementById('price').value;
+
+    const formData = new FormData();
+    formData.append('link', photo);
+    
+    fetch('/comp/smart',{
+      method: 'post',
+      body: formData
+    }).then((res)=>{
+      return res.text();
+    }).then((data)=>{
+      console.log(data);
+    }).catch((error)=>{
+      console.error(error);
+    })
+  });
+</script> -->
+
+<script>
+  ScrollReveal().reveal('.navbar', {duration: '2000', origin: 'bottom'});
+  ScrollReveal().reveal('.scroll', {duration: '2000', origin: 'left', distance:'300px'});
+  ScrollReveal().reveal('.info-right', {duration: '2000', origin: 'right', distance:'300px'});
+  ScrollReveal().reveal('.jumbo', {duration: '2000', origin: 'bottom', distance:'300px'});
+ 
+ </script>
+
+</body>
+</html>
