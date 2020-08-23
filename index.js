@@ -12,7 +12,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const multer = require('multer');
 
-mongoose.connect('mongodb+srv://ahmed:ahm23456@cluster0.gn4ey.mongodb.net/<dbname>?retryWrites=true&w=majority');
+mongoose.connect('mongodb://localhost/test-1');
 let db = mongoose.connection;
 db.on('error', err => console.log(err));
 db.once('open', ()=> console.log('connected to MongoBD'));
@@ -65,5 +65,5 @@ app.use('/comp', rout1);
 //login route
 const login = require('./routes/login');
 app.use('/login', login);
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 9000;
 app.listen(PORT, ()=> console.log('server is running'));

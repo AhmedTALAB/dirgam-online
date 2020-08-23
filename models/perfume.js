@@ -10,7 +10,7 @@ let perfumeschema = mongoose.Schema({
         type: String,
         required: true
     },
-    collection:{
+    catogry:{
         type: String,
         required: true
     },
@@ -25,4 +25,4 @@ let perfumeschema = mongoose.Schema({
  
 });
 
-const perfume = module.exports = mongoose.model('Perfume', perfumeschema);
+const Perfume = module.exports = mongoose.model('Perfume', perfumeschema);

@@ -30,9 +30,8 @@
                   add Products
                 </a>
                 <div class="dropdown-menu dropless" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item "  type="button" data-toggle="modal" data-target="#smart">Smart collections </a>
-                  <a class="dropdown-item "  type="button" data-toggle="modal" data-target="#brand">Brand collections</a>
-                  <a class="dropdown-item "  type="button" data-toggle="modal" data-target="#zoufon">Zoufon collections</a>
+                  <a class="dropdown-item "  type="button" data-toggle="modal" data-target="#smart">add perfume </a>
+ 
 
                 </div>
               </li> 
@@ -115,15 +114,24 @@
           <label >upload photo</label><br>
          <input class="form-control" name="link" type="file" id="photo" >
         </div>
-        <div class="fprm-control">
+        <div class="form-group">
           <label>Perfume name</label>
-          <input class="form-control" name="perfume" placeholder="add name" type="text" id="perfume">
+          <input class="form-control" name="name" placeholder="add name" type="text" id="perfume">
         </div>
-        <div class="fprm-control">
+        <div class="form-group">
+          <label>collection name</label>
+          <input class="form-control" name="catogry" placeholder="add catogry" type="text" id="perfume">
+        </div>
+        
+        <div class="form-group">
+          <label>for each gender</label>
+          <input class="form-control" name="gender" placeholder="add gender" type="text" >
+        
+       </div>
+        <div class="form-group">
           <label>Perfume price</label>
           <input class="form-control" name="price" placeholder="add name" type="number" id="price">
         </div>
-    
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -134,78 +142,7 @@
   </div>
 </div>
 
-<!-- brand model -->
-<div class="modal fade" id="brand" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-        <form method="POST" action="/comp/brand" enctype="multipart/form-data">
-          <%= typeof msg != 'undefined' ? msg : '' %>
-      <div class="modal-header">
-        <h3 class="modal-title text-danger text-center" id="exampleModalLabel">Brand product</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label >upload photo</label><br>
-         <input class="form-control" name="link" type="file" >
-        </div>
-        <div class="fprm-control">
-          <label>Perfume name</label>
-          <input class="form-control" name="perfume" placeholder="add name" type="text">
-        </div>
-        <div class="fprm-control">
-          <label>Perfume price</label>
-          <input class="form-control" name="price" placeholder="add name" type="number">
-        </div>
-    
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
 
-<!-- zoufon model-->
-
-<div class="modal fade" id="zoufon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-        <form method="POST" action="/comp/zoufon" enctype="multipart/form-data">
-          <%= typeof msg != 'undefined' ? msg : '' %>
-      <div class="modal-header">
-        <h3 class="modal-title text-danger text-center" id="exampleModalLabel">Zoufon product</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label >upload photo</label><br>
-         <input class="form-control" name="link" type="file" >
-        </div>
-        <div class="fprm-control">
-          <label>Perfume name</label>
-          <input class="form-control" name="perfume" placeholder="add name" type="text">
-        </div>
-        <div class="fprm-control">
-          <label>Perfume price</label>
-          <input class="form-control" name="price" placeholder="add name" type="number">
-        </div>
-    
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
 
 <!--script forms-->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

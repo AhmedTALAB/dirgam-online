@@ -58,13 +58,15 @@
 
   <div class="container-fluid smP">
     <div class="row"> 
-<% smart.forEach((smart)=>{ %>     
+<% perfumeforEach((perfume)=>{ %>     
     <div class="col-md-3 col-sm-4  ">  
      <div class="card card2">
-      <img class="img-sm" src="/img/<%=`${smart.link}`%>" class="card-img-top">
+      <img class="img-sm" src="/img/<%=`${perfume.link}`%>" class="card-img-top">
        <div class="card-block card1">
-        <h3 class="card-title"> <%= smart.perfume %></h3> 
-        <h5><strong>price:</strong> <%=smart.price %>SDG </h5>
+        <h3 class="card-title"> <%= perfume.name %></h3> 
+        <h5> <%=smart.gender %> </h5>
+        <h5> <%=smart.catogry %> </h5>
+        <h5> <%=smart.price %> SDG </h5>
         <br>
         <a href="<%=`/comp/smart/${smart._id}` %>" class="btn btn-primary">التفاصيل</a> <br>
     
