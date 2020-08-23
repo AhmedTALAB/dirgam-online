@@ -27,20 +27,7 @@ cb(new Error('IMAGES only'));
 
     }
 }).single('link');
-//check file fun
-// function checkfiletype(file, cb){
-// //allowed ext
-// let filetypes = /jpeg|jpg|png|gif/;
-// //match ext
-// let extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-// //match mime
-// let mimtype = filetypes.test(path.extname(file.mimtype));
-// if(extname && mimtype){
-//     return cb(null, true);
-// }else{
-//     cb('Error: images only');
-// }
-// }
+
 
 //special offers rout
 router.get('/special-offer',(req, res)=>{
