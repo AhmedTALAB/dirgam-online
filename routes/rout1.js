@@ -34,13 +34,12 @@ res.render('special');
 
 //smart routes
 router.get('/smart',(req, res)=>{
-
-    // perfume.find({}, (err, perfume)=>{
-//     if (err) throw err;
-//     else{
-//         res.render('smart', {perfume:perfume});
-//     }
-// });
+    Perfume.find({}, (err, perfume)=>{
+    if (err) throw err;
+    else{
+        res.render('smart', {perfume:perfume});
+    }
+});
 });
 router.get('/smart/:id', (req, res)=>{
 perfume.findById(req.params.id, (err, smart)=>{
