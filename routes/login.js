@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Admin = require('../models/logU');
+const Admin = require('../models/admin');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
@@ -25,7 +25,7 @@ res.render('register2');
 //A1-register User
 router.post('/register',(req, res)=>{
 let user = new Admin();
-user.name = req.body.name;
+
 user.username = req.body.username;
 user.email = req.body.email;
 user.password = req.body.password;

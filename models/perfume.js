@@ -10,11 +10,11 @@ let perfumeschema = mongoose.Schema({
         type: String,
         required: true
     },
-    catogry:{
+    brand:{
         type: String,
         required: true
     },
-    gender:{
+    catogry:{
         type: String,
         required: true
     },

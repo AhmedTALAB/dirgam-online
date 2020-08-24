@@ -1,4 +1,4 @@
 module.exports = {
-    database:'mongodb://localhost/dirgamBase',
+    database:'mongodb://localhost/test-1',
     secret:'cat secret'
 }

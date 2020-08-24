@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 
 let adminschema = mongoose.Schema({
-    name:{
-        type: String,
-        required: true
-    },
+
     username:{
         type: String,
         required: true

@@ -33,19 +33,19 @@ res.render('special');
 
 
 //smart routes
-router.get('/smart',(req, res)=>{
-    Perfume.find({}, (err, perfume)=>{
+router.post('/perfume',(req, res)=>{
+    Perfume.find({brand:req.body.brand,catogry:req.body.catogry }, (err, perfume)=>{
     if (err) throw err;
     else{
-        res.render('smart', {perfume:perfume});
+        res.render('perfume', {perfume:perfume});
     }
 });
 });
-router.get('/smart/:id', (req, res)=>{
+router.get('/perfume/:id', (req, res)=>{
 Perfume.findById(req.params.id, (err, smart)=>{
 if (err) throw err;
 else{
-    res.render('smart-detail', {smart:smart});
+    res.render('perfume-detail', {smart:smart});
 }
 });
 });
@@ -60,35 +60,11 @@ router.get('/brand',(req, res)=>{
         }
     });
 });
-router.get('/brand/:id', (req, res)=>{
-Perfume.findById(req.params.id, (err, brand)=>{
-if (err) throw err;
-else{
-    res.render('brand-detail', {brand:brand});
-}
-});
-});
-//zoufun route
-router.get('/zoufon',(req, res)=>{
-    Perfume.find({}, (err, zoufon)=>{
-        if (err) throw err;
-        else{
-            res.render('zoufon', {zoufon:zoufon});
-        }
-    });
-});
-router.get('/zoufon/:id', (req, res)=>{
-Perfume.findById(req.params.id, (err, zoufon)=>{
-if (err) throw err;
-else{
-    res.render('zoufon-detail', {zoufon:zoufon});
-}
-});
-});
+
 
 //post requests
 //1- smart
-router.post('/smart',(req, res)=>{
+router.post('/perfume',(req, res)=>{
 upload(req, res, (err)=>{
    if(err){
     res.render('index',{msg: err});
@@ -98,15 +74,15 @@ console.log(err);
 
 perfume.link = req.file.filename;      
 perfume.name = req.body.name;
+perfume.brand = req.body.brand;
 perfume.catogry = req.body.catogry;
-perfume.gender = req.body.gender;
 perfume.price = req.body.price;
 
 perfume.save((err)=>{
  if (err) console.log(err);
  else{
      req.flash('success', 'new smart product added');
-     res.redirect('/comp/smart');
+     res.redirect('/comp/perfume');
  }
 });
    }
@@ -125,7 +101,7 @@ Perfume.findOne({'name':username}, (err, smart)=>{
         if(smart == null){
             res.render('404');
         }else{
-            res.render('find-smart', {smart:smart});
+            res.render('find-perfume', {smart:smart});
 
         }
     }
