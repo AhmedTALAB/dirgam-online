@@ -42,7 +42,7 @@ router.get('/smart',(req, res)=>{
 });
 });
 router.get('/smart/:id', (req, res)=>{
-perfume.findById(req.params.id, (err, smart)=>{
+Perfume.findById(req.params.id, (err, smart)=>{
 if (err) throw err;
 else{
     res.render('smart-detail', {smart:smart});
