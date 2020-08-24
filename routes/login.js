@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/logU');
+const Admin = require('../models/logU');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
@@ -24,7 +24,7 @@ res.render('register2');
 // post requests
 //A1-register User
 router.post('/register',(req, res)=>{
-let user = new User();
+let user = new Admin();
 user.name = req.body.name;
 user.username = req.body.username;
 user.email = req.body.email;
@@ -46,28 +46,28 @@ bcrypt.hash(user.password, salt, (err, hash)=>{
 
 });
 // A2 register admin
-router.post('/register2',(req, res)=>{
-    let admin = new Admin();
-    admin.name = req.body.name;
-    admin.username = req.body.username;
-    admin.email = req.body.email;
-    admin.password = req.body.password;
+// router.post('/register2',(req, res)=>{
+//     let admin = new Admin();
+//     admin.name = req.body.name;
+//     admin.username = req.body.username;
+//     admin.email = req.body.email;
+//     admin.password = req.body.password;
     
-    bcrypt.genSalt(10, (err,salt)=>{
-    bcrypt.hash(admin.password, salt, (err, hash)=>{
-        if(err) console.log(err);
-        admin.password = hash;
-        admin.save((err)=>{
-            if (err) throw err;
-            else{           
-                 res.redirect('/login/login-admin');
+//     bcrypt.genSalt(10, (err,salt)=>{
+//     bcrypt.hash(admin.password, salt, (err, hash)=>{
+//         if(err) console.log(err);
+//         admin.password = hash;
+//         admin.save((err)=>{
+//             if (err) throw err;
+//             else{           
+//                  res.redirect('/login/login-admin');
         
-            }
-        });
-    });
-    });
+//             }
+//         });
+//     });
+//     });
     
-    });
+//     });
 
 //B1- login-user
 router.post('/login-user',(req, res, next)=>{
