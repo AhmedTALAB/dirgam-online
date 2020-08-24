@@ -53,7 +53,7 @@ else{
 
 //brand route
 router.get('/brand',(req, res)=>{
-    perfume.find({}, (err, brand)=>{
+    Perfume.find({}, (err, brand)=>{
         if (err) throw err;
         else{
             res.render('brand', {brand:brand});
@@ -61,7 +61,7 @@ router.get('/brand',(req, res)=>{
     });
 });
 router.get('/brand/:id', (req, res)=>{
-perfume.findById(req.params.id, (err, brand)=>{
+Perfume.findById(req.params.id, (err, brand)=>{
 if (err) throw err;
 else{
     res.render('brand-detail', {brand:brand});
@@ -70,7 +70,7 @@ else{
 });
 //zoufun route
 router.get('/zoufon',(req, res)=>{
-    perfume.find({}, (err, zoufon)=>{
+    Perfume.find({}, (err, zoufon)=>{
         if (err) throw err;
         else{
             res.render('zoufon', {zoufon:zoufon});
@@ -78,7 +78,7 @@ router.get('/zoufon',(req, res)=>{
     });
 });
 router.get('/zoufon/:id', (req, res)=>{
-perfume.findById(req.params.id, (err, zoufon)=>{
+Perfume.findById(req.params.id, (err, zoufon)=>{
 if (err) throw err;
 else{
     res.render('zoufon-detail', {zoufon:zoufon});
@@ -117,7 +117,7 @@ perfume.save((err)=>{
 //serach
 router.post('/searchSm', (req,res)=>{
 let username = req.body.username;
-perfume.findOne({'name':username}, (err, smart)=>{
+Perfume.findOne({'name':username}, (err, smart)=>{
     if(err){
     console.log(err)
     }
