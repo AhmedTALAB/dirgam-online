@@ -12,7 +12,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const multer = require('multer');
 
-mongoose.connect('mongodb://localhost/test-1');
+mongoose.connect('mongodb+srv://ahmed:ahm12345@cluster1.95zhc.mongodb.net/<dbname>?retryWrites=true&w=majority');
 let db = mongoose.connection;
 db.on('error', err => console.log(err));
 db.once('open', ()=> console.log('connected to MongoBD'));
