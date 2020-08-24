@@ -1,111 +1,86 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Perfume = require('../models/perfume');
-var ObjectId = require('mongodb').ObjectID;
-const multer = require('multer');
-const path = require('path');
-//set storage engine
-const storage = multer.diskStorage({
-destination: './public/img/',
-filename: (req, file, cb)=>{
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-}
-});
-// init upload
-const upload = multer({
-    storage: storage,
-    limits: {fileSize:1000000000},
-    fileFilter: (req, file, cb)=>{
-if(file.mimetype === "image/jpeg" || file.mimetype === "image/png"){
-    cb(null, true);}
-else{
-cb(new Error('IMAGES only'));
-    }
-
-    }
-}).single('link');
-
+const Perfume = require("../models/perfume");
+var ObjectId = require("mongodb").ObjectID;
+const upload = require("../middlewares/multer");
 
 //special offers rout
-router.get('/special-offer',(req, res)=>{
-res.render('special');
+router.get("/special-offer", (req, res) => {
+  res.render("special");
 });
-
 
 //smart routes
-router.post('/perfume',(req, res)=>{
-    Perfume.find({brand:req.body.brand,catogry:req.body.catogry }, (err, perfume)=>{
-    if (err) throw err;
-    else{
-        res.render('perfume', {perfume:perfume});
+router.post("/perfume", (req, res) => {
+  Perfume.find(
+    { brand: req.body.brand, catogry: req.body.catogry },
+    (err, perfume) => {
+      if (err) throw err;
+      else {
+        res.render("perfume", { perfume });
+      }
     }
-});
-});
-router.get('/perfume/:id', (req, res)=>{
-Perfume.findById(req.params.id, (err, smart)=>{
-if (err) throw err;
-else{
-    res.render('perfume-detail', {smart:smart});
-}
-});
+  );
 });
 
+router.get("/perfume/:id", (req, res) => {
+  Perfume.findById(req.params.id, (err, perfume) => {
+    if (err) throw err;
+    else {
+      res.render("perfume-detail", { smart: perfume });
+    }
+  });
+});
 
 //brand route
-router.get('/brand',(req, res)=>{
-    Perfume.find({}, (err, brand)=>{
-        if (err) throw err;
-        else{
-            res.render('brand', {brand:brand});
-        }
-    });
+router.get("/brand", (req, res) => {
+  Perfume.find({}, (err, brand) => {
+    if (err) throw err;
+    else {
+      res.render("brand", { brand });
+    }
+  });
 });
-
 
 //post requests
 //1- smart
-router.post('/perfume',(req, res)=>{
-upload(req, res, (err)=>{
-   if(err){
-    res.render('index',{msg: err});
-console.log(err);
-   } else{
-   let perfume = new Perfume();
-
-perfume.link = req.file.filename;      
-perfume.name = req.body.name;
-perfume.brand = req.body.brand;
-perfume.catogry = req.body.catogry;
-perfume.price = req.body.price;
-
-perfume.save((err)=>{
- if (err) console.log(err);
- else{
-     req.flash('success', 'new smart product added');
-     res.redirect('/comp/perfume');
- }
+router.post("/perfume", (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      res.render("index", { msg: err });
+      console.log(err);
+    } else {
+      const { name, brand, catogry, price } = req.body;
+      new Perfume({
+        link: req.file.filename,
+        name,
+        brand,
+        catogry,
+        price,
+      })
+        .save()
+        .then(() => {
+          req.flash("success", "new smart product added");
+          res.redirect("/comp/perfume");
+        })
+        .catch((err) => console.log(err));
+    }
+  });
 });
-   }
 
-});
-
-});
 //serach
-router.post('/searchSm', (req,res)=>{
-let username = req.body.username;
-Perfume.findOne({'name':username}, (err, smart)=>{
-    if(err){
-    console.log(err)
+router.post("/searchSm", (req, res) => {
+  let username = req.body.username;
+  Perfume.findOne({ name: username }, (err, smart) => {
+    if (err) {
+      console.log(err);
+    } else {
+      if (smart == null) {
+        res.render("404");
+      } else {
+        res.render("find-perfume", { smart });
+      }
     }
-    else{
-        if(smart == null){
-            res.render('404');
-        }else{
-            res.render('find-perfume', {smart:smart});
-
-        }
-    }
-})
+  });
 });
 
 // 2- brand
@@ -116,11 +91,11 @@ Perfume.findOne({'name':username}, (err, smart)=>{
 //      console.log(err);
 //         } else{
 //         let brand = new perfume();
-     
-//      brand.link = req.file.filename;      
+
+//      brand.link = req.file.filename;
 //      brand.perfume = req.body.perfume;
 //      brand.price = req.body.price;
-     
+
 //      brand.save((err)=>{
 //       if (err) console.log(err);
 //       else{
@@ -129,7 +104,7 @@ Perfume.findOne({'name':username}, (err, smart)=>{
 //       }
 //      });
 //         }
-     
+
 //      });
 // });
 //serach
@@ -158,11 +133,11 @@ Perfume.findOne({'name':username}, (err, smart)=>{
 //      console.log(err);
 //         } else{
 //         let zoufon = new perfume();
-     
-//      zoufon.link = req.file.filename;      
+
+//      zoufon.link = req.file.filename;
 //      zoufon.perfume = req.body.perfume;
 //      zoufon.price = req.body.price;
-     
+
 //      zoufon.save((err)=>{
 //       if (err) throw err;
 //       else{
@@ -171,7 +146,7 @@ Perfume.findOne({'name':username}, (err, smart)=>{
 //       }
 //      });
 //         }
-     
+
 //      });
 // });
 //serach
@@ -182,7 +157,7 @@ Perfume.findOne({'name':username}, (err, smart)=>{
 //         res.render('404');
 //     }
 //     else{
-        
+
 //         if(zoufon == null){
 //             res.render('404');
 //         }else{
