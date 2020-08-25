@@ -9,6 +9,21 @@ router.get("/special-offer", (req, res) => {
   res.render("special");
 });
 
+router.get("/perfumes", (req, res) => {
+  const queryObject = req.query;
+  if (JSON.stringify(queryObject) !== JSON.stringify({})) {
+    console.log(queryObject);
+    Perfume.find(queryObject, (err, docs) => {
+      if (err) res.send(err);
+      res.send(docs);
+    });
+  } else {
+    Perfume.find({}, (err, docs) => {
+      if (err) res.send(err);
+      res.send(docs);
+    });
+  }
+});
 //smart routes
 router.post("/perfume", (req, res) => {
   Perfume.find(
