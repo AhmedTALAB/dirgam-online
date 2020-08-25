@@ -12,7 +12,9 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("connected to the database"))
+  .then(() => {
+    console.log("connected to the database");
+  })
   .catch((err) => console.log(err));
 
 app.use(express.static(path.join(__dirname, "public")));

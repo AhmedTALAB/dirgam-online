@@ -1,9 +1,32 @@
 const express = require("express");
 const router = express.Router();
 const Perfume = require("../models/perfume");
+const fs = require("fs");
 var ObjectId = require("mongodb").ObjectID;
-const upload = require("../middlewares/multer");
-
+const multer = require("multer");
+const path = require("path");
+//set storage engine
+const storage = multer.diskStorage({
+  destination: "./public/img/",
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+// init upload
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1000000000 },
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+      cb(null, true);
+    } else {
+      cb(new Error("IMAGES only"));
+    }
+  },
+}).single("link");
 //special offers rout
 router.get("/special-offer", (req, res) => {
   res.render("special");
@@ -25,16 +48,15 @@ router.get("/perfumes", (req, res) => {
   }
 });
 //smart routes
-router.post("/perfume", (req, res) => {
-  Perfume.find(
-    { brand: req.body.brand, catogry: req.body.catogry },
-    (err, perfume) => {
-      if (err) throw err;
-      else {
-        res.render("perfume", { perfume });
-      }
+router.get("/perfume", (req, res) => {
+  Perfume.find({}, (err, perfume) => {
+    // const img = perfume.children.id(perfume.image._id);
+    console.log(JSON.stringify(perfume.image));
+    if (err) throw err;
+    else {
+      res.render("perfume", { perfume, user: req.user });
     }
-  );
+  });
 });
 
 router.get("/perfume/:id", (req, res) => {
@@ -60,24 +82,31 @@ router.get("/brand", (req, res) => {
 //1- smart
 router.post("/perfume", (req, res) => {
   upload(req, res, (err) => {
+    console.log(" this is the image" + req.file);
     if (err) {
       res.render("index", { msg: err });
-      console.log(err);
+      console.log(" this is big error" + err);
     } else {
       const { name, brand, catogry, price } = req.body;
-      new Perfume({
-        link: req.file.filename,
+      const newPerfume = {
+        image: {
+          data: fs.readFileSync(
+            path.join(__dirname, "..", "public", "img", req.file.filename)
+          ),
+          contentType: req.file.mimetype,
+        },
         name,
         brand,
         catogry,
         price,
-      })
-        .save()
-        .then(() => {
-          req.flash("success", "new smart product added");
-          res.redirect("/comp/perfume");
-        })
-        .catch((err) => console.log(err));
+      };
+      Perfume.create(newPerfume, (err, perfume) => {
+        if (err) throw err;
+        console.log(perfume);
+        perfume.save();
+        req.flash("success", "new smart product added");
+        res.redirect("/comp/perfume");
+      });
     }
   });
 });
