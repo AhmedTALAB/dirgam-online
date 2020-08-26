@@ -14,7 +14,7 @@ let perfumeschema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    catogry: {
+    category: {
       type: String,
       required: true,
     },
@@ -26,4 +26,4 @@ let perfumeschema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Perfume", perfumeschema);
+module.exports = mongoose.model("perfume", perfumeschema);

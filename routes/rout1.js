@@ -35,7 +35,6 @@ router.get("/special-offer", (req, res) => {
 router.get("/perfumes", (req, res) => {
   const queryObject = req.query;
   if (JSON.stringify(queryObject) !== JSON.stringify({})) {
-    console.log(queryObject);
     Perfume.find(queryObject, (err, docs) => {
       if (err) res.send(err);
       res.send(docs);
@@ -51,7 +50,7 @@ router.get("/perfumes", (req, res) => {
 router.get("/perfume", (req, res) => {
   Perfume.find({}, (err, perfume) => {
     // const img = perfume.children.id(perfume.image._id);
-    console.log(JSON.stringify(perfume.image));
+    console.log(perfume);
     if (err) throw err;
     else {
       res.render("perfume", { perfume, user: req.user });
@@ -87,7 +86,7 @@ router.post("/perfume", (req, res) => {
       res.render("index", { msg: err });
       console.log(" this is big error" + err);
     } else {
-      const { name, brand, catogry, price } = req.body;
+      const { name, brand, category, price } = req.body;
       const newPerfume = {
         image: {
           data: fs.readFileSync(
@@ -97,7 +96,7 @@ router.post("/perfume", (req, res) => {
         },
         name,
         brand,
-        catogry,
+        category,
         price,
       };
       Perfume.create(newPerfume, (err, perfume) => {

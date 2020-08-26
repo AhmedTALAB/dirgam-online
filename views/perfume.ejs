@@ -62,11 +62,12 @@
 <% perfume.forEach((perfume)=>{ %>     
     <div class="col-md-3 col-sm-4  ">  
      <div class="card card2">
-      <img class="img-sm" src="/img/<%=`${perfume.link}`%>" class="card-img-top">
+      <img src="data:image/<%=perfume.image.contentType%>;base64, 
+                     <%=perfume.image.data.toString('base64')%>"> 
        <div class="card-block card1">
         <h3 class="card-title"> <%= perfume.name %></h3> 
         <h5> <%=perfume.brand %> </h5>
-        <h5> <%=perfume.catogry %> </h5>
+        <h5> <%=perfume.category %> </h5>
         <h5> <%=perfume.price %> SDG </h5>
         <br>
         <a href="<%=`/comp/smart/${perfume._id}` %>" class="btn btn-primary">التفاصيل</a> <br>
